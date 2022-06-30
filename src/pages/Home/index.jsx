@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import logo from "../../logo.svg";
+import { ListItem } from "./components/ListComponents";
 
 export const Home = () => {
   const [task, setTask] = useState([]);
@@ -8,19 +9,17 @@ export const Home = () => {
 
   const save = (event) => {
     event.preventDefault();
+
     const addTask = task;
     addTask.push(newTask);
     setTask(addTask);
     setNewTask("");
   };
 
-  const listTask = task.map(e => {
-    return (
-      <li key={e}>
-        {e}
-      </li>
-    )
-  })
+  const listTask = task.map(e =>
+    <ListItem key={e} value={e} />
+  );
+
   return (
     <div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
@@ -32,7 +31,7 @@ export const Home = () => {
             type="text"
             name="newTask"
             value={newTask}
-            autoComplete="false"
+            autoComplete="off"
             onChange={(e) => setNewTask(e.target.value)}
           ></input>
         </div>
