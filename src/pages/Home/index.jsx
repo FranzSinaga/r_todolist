@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import logo from "../../logo.svg";
 import { ListItem } from "./components/ListComponents";
@@ -10,6 +10,7 @@ export const Home = () => {
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos'));
     if (todos) {
+      console.log(todos)
       setTask(todos);
     }
   }, []);
