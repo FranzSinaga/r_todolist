@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../logo.svg";
 import { ListItem } from "./components/ListComponents";
 
@@ -7,14 +7,23 @@ export const Home = () => {
   const [task, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
 
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem('todos'));
+    if (todos) {
+      setTask(todos);
+    }
+  }, []);
+
   const save = (event) => {
     event.preventDefault();
 
     const addTask = task;
     addTask.push(newTask);
+    localStorage.setItem("todos", JSON.stringify(addTask));
     setTask(addTask);
     setNewTask("");
   };
+
 
   const listTask = task.map(e =>
     <ListItem key={e} value={e} />
@@ -26,14 +35,16 @@ export const Home = () => {
       <h3>To Do Web</h3>
       <form onSubmit={save} method="post">
         <div>
-          <label>Task</label>
-          <input
-            type="text"
-            name="newTask"
-            value={newTask}
-            autoComplete="off"
-            onChange={(e) => setNewTask(e.target.value)}
-          ></input>
+          <label>
+            Task
+            <input
+              type="text"
+              name="newTask"
+              value={newTask}
+              autoComplete="off"
+              onChange={(e) => setNewTask(e.target.value)}
+            ></input>
+          </label>
         </div>
         <button type="submit">Save</button>
         <br />
