@@ -1,27 +1,28 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { initTodo } from "../../../redux/slices/todoSlices";
 
 export const ListItem = (props) => {
   const value = props.value;
-  const allDataTask = JSON.parse(localStorage.getItem('todos'));
   const [isDisabled, setIsDisabled] = useState(true);
   const [itemValue, setItemvalue] = useState(value)
+
+  const dispatch = useDispatch();
+  const allDataTask = useSelector((state) => state.todo.todoList)
+
   const deleteTask = (value) => {
-    const delTask = allDataTask.filter(e => {
-      return e !== value
-    })
-    localStorage.setItem("todos", JSON.stringify(delTask));
-    window.location.reload(); // reload untuk sementara
+    const result = allDataTask.filter(e => e !== value)
+    dispatch(initTodo(result))
+    localStorage.setItem("todos", JSON.stringify(result));
   }
 
-  const editTask = () => {
+  const editTask = (event) => {
     let temp = [...allDataTask];
-    const idx = allDataTask.indexOf(value)
-    console.log(idx)
+    const idx = allDataTask.indexOf(value);
     temp[idx] = itemValue;
-    console.log(temp)
+    dispatch(initTodo(temp))
     localStorage.setItem("todos", JSON.stringify(temp));
     setIsDisabled(true)
-    window.location.reload();
   }
 
   return (

@@ -1,32 +1,32 @@
 // import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import logo from "../../logo.svg";
+import { useSelector, useDispatch } from 'react-redux'
 import { ListItem } from "./components/ListComponents";
 
+import { addTodo, initTodo } from "../../redux/slices/todoSlices.js"
+
 export const Home = () => {
-  const [task, setTask] = useState([]);
   const [newTask, setNewTask] = useState("");
+
+  const dispatch = useDispatch();
+  const todoList = useSelector((state) => state.todo.todoList);
 
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem('todos'));
     if (todos) {
-      console.log(todos)
-      setTask(todos);
+      dispatch(initTodo(todos));
     }
-  }, []);
+  }, [dispatch]);
 
   const save = (event) => {
     event.preventDefault();
-
-    const addTask = task;
-    addTask.push(newTask);
-    localStorage.setItem("todos", JSON.stringify(addTask));
-    setTask(addTask);
+    dispatch(addTodo(newTask))
     setNewTask("");
   };
 
 
-  const listTask = task.map(e =>
+  const listTask = todoList.map(e =>
     <ListItem key={e} value={e} />
   );
 
@@ -49,7 +49,7 @@ export const Home = () => {
         </div>
         <button type="submit">Save</button>
         <br />
-        {task.length > 0 ? "Todo: " : "Tidak ada task"}
+        {todoList.length > 0 ? "Todo: " : "Tidak ada task"}
         <ol>
           {listTask}
         </ol>
