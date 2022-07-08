@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { setItem } from '../../utils/storage'
 
 const initialState = {
   todoList: [],
@@ -11,6 +12,7 @@ export const todoSlices = createSlice({
   reducers: {
     initTodo: (state, value) => {
       state.todoList = value.payload
+      setItem("todos", JSON.stringify(state.todoList));
     },
     addTodo: (state, value) => {
       state.todoList.push(value.payload);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+// Slices
 import { initTodo } from "../../../redux/slices/todoSlices";
 
 export const ListItem = (props) => {
@@ -13,15 +14,14 @@ export const ListItem = (props) => {
   const deleteTask = (value) => {
     const result = allDataTask.filter(e => e !== value)
     dispatch(initTodo(result))
-    localStorage.setItem("todos", JSON.stringify(result));
   }
 
-  const editTask = (event) => {
+  const editTask = () => {
     let temp = [...allDataTask];
     const idx = allDataTask.indexOf(value);
     temp[idx] = itemValue;
+
     dispatch(initTodo(temp))
-    localStorage.setItem("todos", JSON.stringify(temp));
     setIsDisabled(true)
   }
 

@@ -1,10 +1,12 @@
 // import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import logo from "../../logo.svg";
 import { useSelector, useDispatch } from 'react-redux'
-import { ListItem } from "./components/ListComponents";
-
+import logo from "../../logo.svg";
+import { getItem } from "../../utils/storage";
+// Slices
 import { addTodo, initTodo } from "../../redux/slices/todoSlices.js"
+// Components
+import { ListItem } from "./components/ListComponents";
 
 export const Home = () => {
   const [newTask, setNewTask] = useState("");
@@ -13,7 +15,7 @@ export const Home = () => {
   const todoList = useSelector((state) => state.todo.todoList);
 
   useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem('todos'));
+    const todos = JSON.parse(getItem('todos'));
     if (todos) {
       dispatch(initTodo(todos));
     }
