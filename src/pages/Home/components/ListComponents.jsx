@@ -26,32 +26,47 @@ export const ListItem = (props) => {
   }
 
   return (
-    <li>
-      <input
-        type="text"
-        name="newTask"
-        value={itemValue}
-        autoComplete="off"
-        disabled={isDisabled}
-        onChange={(e) => setItemvalue(e.target.value)}
-      ></input>
-      {isDisabled
-        ? null
-        : <button type="button" onClick={() => editTask()}>Confirm</button>
-      }
-      <button
-        type="button"
-        onClick={() => {
-          setIsDisabled(!isDisabled);
-          setItemvalue(value);
-        }}>
-        {isDisabled ? 'Edit' : 'Cancel'}
-      </button>
-      {isDisabled
-        ? <button type="button" onClick={() => deleteTask(value)}>Delete</button>
-        : null
-      }
-    </li>
+    <li className="max-w-full bg-white mt-4 py-2 px-5 border-spacing-0 drop-shadow-md hover:drop-shadow-xl rounded-2xl">
+      <div className="flex justify-between">
+        <input
+          className={`  focus:ring-green-500 focus:border-green-500 mt-1 block w-3/4 sm:text-sm ${isDisabled ? "border-none" : " shadow-sm border border-gray-300"}  rounded-md`}
+          type="text"
+          name="newTask"
+          value={itemValue}
+          autoComplete="off"
+          disabled={isDisabled}
+          onChange={(e) => setItemvalue(e.target.value)}
+        ></input>
+        <div>
+          {isDisabled
+            ? null
+            : <button
+              className="inline-flex mr-1 justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+              type="button" onClick={() => editTask()}>
+              Confirm
+            </button>
+          }
+          <button
+            className="inline-flex mr-1 justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            type="button"
+            onClick={() => {
+              setIsDisabled(!isDisabled);
+              setItemvalue(value);
+            }}>
+            {isDisabled ? 'Edit' : 'Cancel'}
+          </button>
+          {isDisabled
+            ? <button
+              className="inline-flex justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-green-700"
+              type="button"
+              onClick={() => deleteTask(value)}>
+              Delete
+            </button>
+            : null
+          }
+        </div>
+      </div>
+    </li >
   );
 }
 
