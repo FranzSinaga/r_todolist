@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { setItem } from '../../utils/storage'
+import * as date from '../../utils/date';
 
 const initialState = {
   todoList: [],
@@ -15,7 +16,13 @@ export const todoSlices = createSlice({
       setItem("todos", JSON.stringify(state.todoList));
     },
     addTodo: (state, value) => {
-      state.todoList.push(value.payload);
+      console.log(date.getDateTimeNow())
+      const data = {
+        task: value.payload,
+        created_at: date.getDateTimeNow(),
+        isDone: false
+      }
+      state.todoList.push(data);
       localStorage.setItem("todos", JSON.stringify(state.todoList));
     }
   },

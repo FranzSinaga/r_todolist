@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 // import logo from "../../logo.svg";
 import { getItem } from "../../utils/storage";
+
 // Slices
 import { addTodo, initTodo } from "../../redux/slices/todoSlices.js"
+
 // Components
 import { ListItem } from "./components/ListComponents";
 
@@ -29,7 +31,7 @@ export const Home = () => {
 
 
   const listTask = todoList.map(e =>
-    <ListItem key={e} value={e} />
+    <ListItem key={e.created_at} value={e} />
   );
 
   return (
@@ -43,7 +45,7 @@ export const Home = () => {
             </span>
           </h2>
         </div>
-
+        {/* <pre>{todoList}</pre> */}
         <div className="py-2">
           <form onSubmit={save} method="post">
             <div>
