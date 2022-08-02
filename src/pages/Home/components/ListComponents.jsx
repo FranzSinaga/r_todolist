@@ -26,7 +26,6 @@ export const ListItem = (props) => {
       updated_at: date.getDateTimeNow()
     }
     if (idx !== -1) temp[idx] = result;
-    console.log(temp, idx)
 
     dispatch(initTodo(temp))
     setIsDisabled(true)
@@ -34,7 +33,19 @@ export const ListItem = (props) => {
 
   const changeStatus = () => {
     var isChecked = document.querySelector('#isDone').checked
+    let temp = [...allDataTask];
     console.log(isChecked)
+    const idx = allDataTask.findIndex(e => e.task === value.task);
+    const result = {
+      task: itemValue.task ? itemValue.task : itemValue,
+      created_at: value.created_at,
+      updated_at: date.getDateTimeNow(),
+      isDone: isChecked ? true : false
+    }
+    if (idx !== -1) temp[idx] = result;
+
+    dispatch(initTodo(temp))
+    setIsDisabled(true)
   }
 
   return (

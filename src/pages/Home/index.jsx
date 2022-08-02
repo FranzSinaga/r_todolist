@@ -30,9 +30,19 @@ export const Home = () => {
   };
 
 
-  const listTask = todoList.map(e =>
-    <ListItem key={e.created_at} value={e} />
-  );
+  const listTask = todoList.map(e => {
+    if (e.isDone === false) {
+      return <ListItem key={e.created_at} value={e} />
+    }
+    return null;
+  });
+
+  const listTaskCompleted = todoList.map(e => {
+    if (e.isDone) {
+      return <ListItem key={e.created_at} value={e} />
+    }
+    return null;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -60,7 +70,6 @@ export const Home = () => {
                   rows={3}
                   className="shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                   placeholder="Add New task"
-                  defaultValue={''}
                   value={newTask}
                   required
                   onChange={(e) => setNewTask(e.target.value)}
@@ -79,6 +88,10 @@ export const Home = () => {
             <br />
             <ol>
               {listTask}
+            </ol>
+            <p>Completed:</p>
+            <ol>
+              {listTaskCompleted}
             </ol>
           </form>
         </div>
