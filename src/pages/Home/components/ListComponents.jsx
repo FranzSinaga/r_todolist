@@ -57,15 +57,6 @@ export const ListItem = (props) => {
         }
 
         <div>
-        <button
-            className="inline-flex mr-1 justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-            type="button"
-            onClick={() => {
-              setIsDisabled(!isDisabled);
-              setItemvalue(value);
-            }}>
-              Done
-          </button>
           {isDisabled
             ? null
             : <button
