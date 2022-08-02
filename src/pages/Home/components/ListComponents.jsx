@@ -32,41 +32,49 @@ export const ListItem = (props) => {
     setIsDisabled(true)
   }
 
+  const changeStatus = () => {
+    var isChecked = document.querySelector('#isDone').checked
+    console.log(isChecked)
+  }
+
   return (
     <li className="max-w-full bg-white mt-4 py-2 px-5 border-spacing-0 drop-shadow-md hover:drop-shadow-xl rounded-2xl">
-      <div className="flex justify-between">
+      <div className="flex flex-row flex-wrap">
+        <input id="isDone" type="checkbox" onChange={(e) => changeStatus(e)} className="flex-none w-4 h-4 mt-2 mr-1 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
         {
           !isDisabled &&
-          <input
-            className={`focus:ring-green-500 block w-3/4 focus:border-green-500 mt-1 sm:text-sm ${isDisabled ? "border-none" : "shadow-sm border border-gray-300"}  rounded-md`}
-            type="text"
-            name="newTask"
-            value={itemValue.task}
-            autoComplete="off"
-            disabled={isDisabled}
-            onChange={(e) => setItemvalue(e.target.value)}
-          ></input>
+          <div className="flex-1">
+            <input
+              className={` focus:ring-green-500 block w-3/4 focus:border-green-500 mt-1 sm:text-sm ${isDisabled ? "border-none" : "shadow-sm border border-gray-300"}  rounded-md`}
+              type="text"
+              name="newTask"
+              value={itemValue.task}
+              autoComplete="off"
+              disabled={isDisabled}
+              onChange={(e) => setItemvalue(e.target.value)}
+            ></input>
+          </div>
         }
         {
           isDisabled &&
-          <div>
+          <div className="flex-1">
             <p className="text-lg leading-none">{value.task} {value.isDone}</p>
             {!value.updated_at && <p className="font-thin text-sm leading-none">Created at: {value.created_at}</p>}
             {value.updated_at && <p className="font-thin text-sm leading-none">Updated at: {value.updated_at}</p>}
           </div>
         }
 
-        <div>
+        <div className="flex-initial">
           {isDisabled
             ? null
             : <button
-              className="inline-flex mr-1 justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+              className="inline-flex mr-1 justify-center py-2 px-4 mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
               type="button" onClick={() => editTask()}>
               Confirm
             </button>
           }
           <button
-            className="inline-flex mr-1 justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="inline-flex mr-1 justify-center py-2 px-4 mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             type="button"
             onClick={() => {
               setIsDisabled(!isDisabled);
@@ -76,7 +84,7 @@ export const ListItem = (props) => {
           </button>
           {isDisabled
             ? <button
-              className="inline-flex justify-center py-2 px-4 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+              className="inline-flex justify-center py-2 px-4 mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
               type="button"
               onClick={() => deleteTask(value)}>
               Delete

@@ -20,7 +20,7 @@ export const todoSlices = createSlice({
       const data = {
         task: value.payload,
         created_at: date.getDateTimeNow(),
-        isDone: false
+        isDone: true
       }
       state.todoList.push(data);
       localStorage.setItem("todos", JSON.stringify(state.todoList));
