@@ -9,3 +9,13 @@ export const getDateTimeNow = () => {
   today = dd + '/' + mm + '/' + yyyy + ' ' + time;
   return today;
 }
+
+export const selectorByDate = (date) => {
+  const delSpace = date.replace(/\s/g, '');
+  const split = delSpace.split('/');
+  const result1 = split.join('');
+
+  const split2 = result1.split(':');
+  const result2 = split2.join('')
+  return result2
+}

@@ -1,23 +1,22 @@
 // import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 // import logo from "../../logo.svg";
 import { getItem } from "../../utils/storage";
 
 // Slices
-import { addTodo, initTodo } from "../../redux/slices/todoSlices.js"
+import { addTodo, initTodo } from "../../redux/slices/todoSlices.js";
 
 // Components
 import { ListItem } from "./components/ListComponents";
 
 export const Home = () => {
   const [newTask, setNewTask] = useState("");
-
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todo.todoList);
 
   useEffect(() => {
-    const todos = JSON.parse(getItem('todos'));
+    const todos = JSON.parse(getItem("todos"));
     if (todos) {
       dispatch(initTodo(todos));
     }
@@ -25,23 +24,32 @@ export const Home = () => {
 
   const save = (event) => {
     event.preventDefault();
-    dispatch(addTodo(newTask))
+    dispatch(addTodo(newTask));
     setNewTask("");
   };
 
-
-  const listTask = todoList.map(e => {
+  const listTask = todoList.map((e, idx) => {
     if (e.isDone === false) {
-      return <ListItem key={e.created_at} value={e} />
+      return (
+        <ListItem key={e.created_at} value={e} isCompleted={false} idx={idx} />
+      );
     }
     return null;
   });
 
-  const listTaskCompleted = todoList.map(e => {
+  const listTaskCompleted = todoList.map((e) => {
     if (e.isDone) {
-      return <ListItem key={e.created_at} value={e} />
+      return <ListItem key={e.created_at} value={e} isCompleted={true} />;
     }
     return null;
+  });
+
+  const incompletedtask = todoList.filter((e) => {
+    return e.isDone === false
+  });
+
+  const completedtask = todoList.filter((e) => {
+    return e.isDone === true
   });
 
   return (
@@ -51,7 +59,9 @@ export const Home = () => {
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span className="block">Hello👋</span>
             <span className="block text-green-600">
-              {todoList.length > 0 ? `You have ${todoList.length} task` : "Let's create a task!"}
+              {incompletedtask.length > 0
+                ? `You have ${incompletedtask.length} task`
+                : "Let's create a task!"}
             </span>
           </h2>
         </div>
@@ -59,7 +69,10 @@ export const Home = () => {
         <div className="py-2">
           <form onSubmit={save} method="post">
             <div>
-              <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="about"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Create New task
               </label>
               <div className="mt-1">
@@ -83,16 +96,11 @@ export const Home = () => {
               >
                 Save
               </button>
-
             </div>
             <br />
-            <ol>
-              {listTask}
-            </ol>
-            <p>Completed:</p>
-            <ol>
-              {listTaskCompleted}
-            </ol>
+            <ol>{listTask}</ol>
+            {completedtask.length > 0 && <p>Completed:</p>}
+            <ol>{listTaskCompleted}</ol>
           </form>
         </div>
       </div>

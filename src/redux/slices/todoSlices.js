@@ -4,7 +4,7 @@ import * as date from '../../utils/date';
 
 const initialState = {
   todoList: [],
-  isGetByLocalStorage: true
+  isGetByLocalStorage: true,
 }
 
 export const todoSlices = createSlice({
@@ -24,11 +24,14 @@ export const todoSlices = createSlice({
       }
       state.todoList.push(data);
       localStorage.setItem("todos", JSON.stringify(state.todoList));
+    },
+    getIncompletedTask: (state) => {
+      return state.todoList
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { initTodo, addTodo } = todoSlices.actions
+export const { initTodo, addTodo, getIncompletedTask } = todoSlices.actions
 
 export default todoSlices.reducer
