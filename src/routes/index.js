@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 export default function WebRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/r_todolist" element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
