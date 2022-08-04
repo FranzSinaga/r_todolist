@@ -38,7 +38,7 @@ export const ListItem = (props) => {
   const changeStatus = (selector) => {
     var isChecked = document.querySelector(`#${selector}`).checked;
     let temp = [...allDataTask];
-    
+
     const idx = allDataTask.findIndex((e) => e.task === value.task);
     const result = {
       task: itemValue.task ? itemValue.task : itemValue,
@@ -53,17 +53,21 @@ export const ListItem = (props) => {
   };
 
   return (
-    <li className="max-w-full bg-white mt-4 py-2 px-5 border-spacing-0 drop-shadow-md hover:drop-shadow-xl rounded-2xl">
+    <li
+      className="max-w-full bg-white mt-4 py-2 px-5 border-spacing-0 drop-shadow-md hover:drop-shadow-xl rounded-2xl
+    dark:bg-gray-600"
+    >
       <div className="flex flex-row flex-wrap">
         {isCompleted && (
           <input
             id={`isDone-${indexData}`}
             type="checkbox"
             onChange={(e) => changeStatus(e)}
-            className="flex-none w-4 h-4 mt-2 mr-1 text-gray-600 
-            bg-gray-100 rounded border-gray-300 focus:ring-green-500 
-            dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 
-            dark:bg-gray-700 dark:border-gray-600"
+            className="flex-none w-4 h-4 mt-2 mr-1 text-green-600 
+            bg-gray-100 rounded border-gray-300 
+            disabled:text-green-300 dark:disabled:text-gray-400
+            dark:disabled:bg-gray-400 focus:ring-2 
+            dark:bg-gray-600  dark:text-gray-600"
             checked
             disabled
           />
@@ -76,14 +80,16 @@ export const ListItem = (props) => {
             onChange={() => changeStatus(`isDone-${indexData}`)}
             className="flex-none w-4 h-4 mt-2 mr-1 text-green-600 
             bg-gray-100 rounded border-gray-300 focus:ring-green-500 
-            dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 
-            dark:bg-gray-700 dark:border-gray-600 disabled:dark:bg-gray-700"
+            dark:focus:ring-gray-100 dark:ring-offset-gray-800 focus:ring-2 
+            dark:bg-gray-700 dark:border-gray-300 disabled:dark:bg-gray-700 cursor-pointer"
           />
         )}
         {!isDisabled && (
           <div className="flex-1">
             <input
-              className={` focus:ring-green-500 block w-3/4 focus:border-green-500 mt-1 sm:text-sm ${
+              className={` focus:ring-green-500 block w-3/4 focus:border-green-500 mt-1 sm:text-sm 
+              dark:focus:ring-gray-500 dark:focus:border-gray-500 dark:bg-gray-600 dark:border-gray-800 dark:text-white dark:placeholder-gray-300"
+              ${
                 isDisabled ? "border-none" : "shadow-sm border border-gray-300"
               }  rounded-md`}
               type="text"
@@ -96,7 +102,7 @@ export const ListItem = (props) => {
           </div>
         )}
         {isDisabled && (
-          <div className="flex-1">
+          <div className="flex-1 dark:text-gray-50">
             <p
               className={`text-lg leading-none ${
                 isCompleted ? "line-through" : ""
@@ -120,8 +126,8 @@ export const ListItem = (props) => {
         <div className="flex-initial">
           {isDisabled ? null : (
             <button
-              className="text-green-500 border-2 border-green-500 
-              hover:bg-green-500 hover:text-white active:bg-green-600 font-bold p-2 
+              className="text-green-400 border-2 border-green-400 
+              hover:bg-green-400 hover:text-white active:bg-green-400 font-bold p-2 
               rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => editTask()}
@@ -143,8 +149,8 @@ export const ListItem = (props) => {
           )}
           {!isCompleted && (
             <button
-              className="text-blue-500 border-2 border-blue-500 
-              hover:bg-blue-500 hover:text-white mt-1 active:bg-blue-600 font-bold p-2 
+              className="text-blue-400 border-2 border-blue-400 
+              hover:bg-blue-400 hover:text-white mt-1 active:bg-blue-400 font-bold p-2 
               rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => {
@@ -185,8 +191,8 @@ export const ListItem = (props) => {
           )}
           {isDisabled ? (
             <button
-              className="text-red-500 border-2 border-red-500 
-              hover:bg-red-500 hover:text-white active:bg-red-600 font-bold p-2 
+              className="text-red-400 border-2 border-red-400 
+              hover:bg-red-400 hover:text-white active:bg-red-400 font-bold p-2 
               rounded outline-none focus:outline-none mr-1 mb-1 mt-1 ease-linear transition-all duration-150"
               type="button"
               onClick={() => deleteTask(value)}

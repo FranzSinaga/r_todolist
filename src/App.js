@@ -1,10 +1,18 @@
 import "./App.css";
 import WebRoutes from "./routes";
+
+import { ThemeProvider } from './components/toggleTheme/ThemeContext';
+import Background from './components/toggleTheme/Background';
+
 function App() {
   return (
-    <div className="App">
-      <WebRoutes />
-    </div>
+    <ThemeProvider>
+      <Background>
+        <div className="App">
+          <WebRoutes />
+        </div>
+      </Background>
+    </ThemeProvider>
   );
 }
 
