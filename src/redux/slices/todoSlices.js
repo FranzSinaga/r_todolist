@@ -16,7 +16,6 @@ export const todoSlices = createSlice({
       setItem("todos", JSON.stringify(state.todoList));
     },
     addTodo: (state, value) => {
-      console.log(date.getDateTimeNow())
       const data = {
         task: value.payload,
         created_at: date.getDateTimeNow(),
