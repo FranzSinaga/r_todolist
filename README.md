@@ -5,7 +5,8 @@ Todo list application built with `React.js` and `Tailwind css`
 Use **`localstorage`** to store todo list in browser
 
 Demo/result:
-https://franzsinaga.github.io/r_todolist/
+<!-- https://franzsinaga.github.io/r_todolist/ -->
+<a href="https://franzsinaga.github.io/r_todolist/" target="_blank">https://franzsinaga.github.io/r_todolist/</a>
 
 
 ## Run Application
