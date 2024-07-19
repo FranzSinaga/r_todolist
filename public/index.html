@@ -41,18 +41,4 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script>
-    function sendHeight() {
-      const height = document.body.scrollHeight;
-      window.parent.postMessage({ height: height }, '*');
-    }
-  
-    // Kirim tinggi saat halaman dimuat
-    window.addEventListener('load', sendHeight);
-  
-    // Kirim tinggi saat ukuran window berubah
-    window.addEventListener('resize', sendHeight);
-  
-    // Jika konten berubah secara dinamis, panggil sendHeight()
-  </script>
 </html>
